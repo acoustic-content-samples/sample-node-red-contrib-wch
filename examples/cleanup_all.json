@@ -1,0 +1,484 @@
+[
+    {
+        "id": "a8e57944.0175",
+        "type": "join",
+        "z": "68555706.c4008",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 490,
+        "y": 140,
+        "wires": [
+            [
+                "29cab646.a59262",
+                "230ee951.4b5a96"
+            ]
+        ]
+    },
+    {
+        "id": "c1dba3f8.027d5",
+        "type": "inject",
+        "z": "68555706.c4008",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "a5e21933.6a7d8"
+            ]
+        ]
+    },
+    {
+        "id": "a5e21933.6a7d8",
+        "type": "wch-content",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "context": "",
+        "typeId": "",
+        "attrId": "",
+        "action": "all",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "67a41c6a.31438c"
+            ]
+        ]
+    },
+    {
+        "id": "67a41c6a.31438c",
+        "type": "function",
+        "z": "68555706.c4008",
+        "name": "",
+        "func": "if (msg.payload.items !== undefined &&\n    msg.payload.items.length > 0) {\n    msg.payload = msg.payload.items;\n    node.send([msg,undefined]);\n} else {\n    node.send([undefined,msg]);\n}\n",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 510,
+        "y": 60,
+        "wires": [
+            [
+                "556fa48f.302bcc"
+            ],
+            [
+                "29cab646.a59262"
+            ]
+        ]
+    },
+    {
+        "id": "556fa48f.302bcc",
+        "type": "split",
+        "z": "68555706.c4008",
+        "name": "",
+        "splt": "\\n",
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "1b944122.84d35f"
+            ]
+        ]
+    },
+    {
+        "id": "1b944122.84d35f",
+        "type": "wch-content",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "context": "",
+        "typeId": "",
+        "attrId": "payload.id",
+        "action": "delete",
+        "x": 320,
+        "y": 140,
+        "wires": [
+            [
+                "a8e57944.0175"
+            ]
+        ]
+    },
+    {
+        "id": "29cab646.a59262",
+        "type": "wch-asset",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "",
+        "context": "",
+        "action": "all",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "b0044353.2962c8"
+            ]
+        ]
+    },
+    {
+        "id": "b0044353.2962c8",
+        "type": "function",
+        "z": "68555706.c4008",
+        "name": "",
+        "func": "if (msg.payload.items !== undefined &&\n    msg.payload.items.length > 0) {\n    msg.payload = msg.payload.items;\n    node.send([msg,undefined]);\n} else {\n    node.send([undefined,msg]);\n}\n",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 510,
+        "y": 220,
+        "wires": [
+            [
+                "4143c1d3.e646a"
+            ],
+            [
+                "c56f434.66d054"
+            ]
+        ]
+    },
+    {
+        "id": "4143c1d3.e646a",
+        "type": "split",
+        "z": "68555706.c4008",
+        "name": "",
+        "splt": "\\n",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "aa070354.95df38"
+            ]
+        ]
+    },
+    {
+        "id": "ccee5e0c.cca7d8",
+        "type": "join",
+        "z": "68555706.c4008",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "c56f434.66d054",
+                "230ee951.4b5a96"
+            ]
+        ]
+    },
+    {
+        "id": "aa070354.95df38",
+        "type": "wch-asset",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "payload.id",
+        "context": "",
+        "action": "delete",
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "ccee5e0c.cca7d8"
+            ]
+        ]
+    },
+    {
+        "id": "c56f434.66d054",
+        "type": "wch-type",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "",
+        "context": "",
+        "action": "all",
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "9ae2dab1.2fc5e8"
+            ]
+        ]
+    },
+    {
+        "id": "9ae2dab1.2fc5e8",
+        "type": "function",
+        "z": "68555706.c4008",
+        "name": "",
+        "func": "if (msg.payload.items !== undefined &&\n    msg.payload.items.length > 0) {\n    msg.payload = msg.payload.items;\n    node.send([msg,undefined]);\n} else {\n    node.send([undefined,msg]);\n}\n",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [
+                "107000be.0a15c7"
+            ],
+            [
+                "a149c65c.1871f8"
+            ]
+        ]
+    },
+    {
+        "id": "107000be.0a15c7",
+        "type": "split",
+        "z": "68555706.c4008",
+        "name": "",
+        "splt": "\\n",
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "befb3013.d4859"
+            ]
+        ]
+    },
+    {
+        "id": "51f6915d.4f4118",
+        "type": "join",
+        "z": "68555706.c4008",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 500,
+        "y": 460,
+        "wires": [
+            [
+                "a149c65c.1871f8",
+                "230ee951.4b5a96"
+            ]
+        ]
+    },
+    {
+        "id": "befb3013.d4859",
+        "type": "wch-type",
+        "z": "68555706.c4008",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "payload.id",
+        "context": "",
+        "action": "delete",
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "51f6915d.4f4118"
+            ]
+        ]
+    },
+    {
+        "id": "a149c65c.1871f8",
+        "type": "wch-category",
+        "z": "68555706.c4008",
+        "name": "",
+        "action": "all",
+        "attrId": "",
+        "context": "",
+        "attrParent": "category.parent",
+        "connection": "b64e7828.ceeb9",
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "3bb9221a.ac8f06"
+            ]
+        ]
+    },
+    {
+        "id": "3bb9221a.ac8f06",
+        "type": "function",
+        "z": "68555706.c4008",
+        "name": "",
+        "func": "if (msg.payload.items !== undefined &&\n    msg.payload.items.length > 0) {\n    msg.payload = msg.payload.items;\n    node.send([msg,undefined]);\n} else {\n    node.send([undefined,msg]);\n}\n",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 510,
+        "y": 540,
+        "wires": [
+            [
+                "691e7b5.c021284"
+            ],
+            [
+                "83a5e3f3.d6849"
+            ]
+        ]
+    },
+    {
+        "id": "691e7b5.c021284",
+        "type": "split",
+        "z": "68555706.c4008",
+        "name": "",
+        "splt": "\\n",
+        "x": 150,
+        "y": 620,
+        "wires": [
+            [
+                "32a41a1b.654f7e"
+            ]
+        ]
+    },
+    {
+        "id": "a5882138.7aea38",
+        "type": "join",
+        "z": "68555706.c4008",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 500,
+        "y": 620,
+        "wires": [
+            [
+                "230ee951.4b5a96",
+                "83a5e3f3.d6849"
+            ]
+        ]
+    },
+    {
+        "id": "32a41a1b.654f7e",
+        "type": "wch-category",
+        "z": "68555706.c4008",
+        "name": "",
+        "action": "delete",
+        "attrId": "payload.id",
+        "context": "",
+        "attrParent": "category.parent",
+        "connection": "b64e7828.ceeb9",
+        "x": 320,
+        "y": 620,
+        "wires": [
+            [
+                "a5882138.7aea38"
+            ]
+        ]
+    },
+    {
+        "id": "230ee951.4b5a96",
+        "type": "debug",
+        "z": "68555706.c4008",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 800,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "83a5e3f3.d6849",
+        "type": "wch-imageprofile",
+        "z": "68555706.c4008",
+        "name": "",
+        "action": "all",
+        "attrId": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 700,
+        "wires": [
+            [
+                "a124299b.3fff8"
+            ]
+        ]
+    },
+    {
+        "id": "75241b00.b351e4",
+        "type": "wch-imageprofile",
+        "z": "68555706.c4008",
+        "name": "",
+        "action": "delete",
+        "attrId": "payload.id",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 780,
+        "wires": [
+            [
+                "12e3142.bcd37ec"
+            ]
+        ]
+    },
+    {
+        "id": "a124299b.3fff8",
+        "type": "function",
+        "z": "68555706.c4008",
+        "name": "",
+        "func": "if (msg.payload.items !== undefined &&\n    msg.payload.items.length > 0) {\n    msg.payload = msg.payload.items;\n    node.send([msg,undefined]);\n} else {\n    node.send([undefined,msg]);\n}\n",
+        "outputs": "2",
+        "noerr": 0,
+        "x": 510,
+        "y": 700,
+        "wires": [
+            [
+                "54a8f349.213ac4"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "54a8f349.213ac4",
+        "type": "split",
+        "z": "68555706.c4008",
+        "name": "",
+        "splt": "\\n",
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "75241b00.b351e4"
+            ]
+        ]
+    },
+    {
+        "id": "12e3142.bcd37ec",
+        "type": "join",
+        "z": "68555706.c4008",
+        "name": "",
+        "mode": "auto",
+        "build": "string",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "timeout": "",
+        "count": "",
+        "x": 500,
+        "y": 780,
+        "wires": [
+            [
+                "230ee951.4b5a96"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

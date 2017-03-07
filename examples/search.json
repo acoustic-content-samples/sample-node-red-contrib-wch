@@ -1,0 +1,302 @@
+[
+    {
+        "id": "1970e740.cef261",
+        "type": "inject",
+        "z": "3e384215.0790c6",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "9ff8f64d.b095e"
+            ]
+        ]
+    },
+    {
+        "id": "9ff8f64d.b095e",
+        "type": "function",
+        "z": "3e384215.0790c6",
+        "name": "Building query",
+        "func": "msg.search_query = {\"q\":\"*:*\"};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 292,
+        "y": 80,
+        "wires": [
+            [
+                "a8220460.63a4d"
+            ]
+        ]
+    },
+    {
+        "id": "a8220460.63a4d",
+        "type": "wch-search",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "action": "search",
+        "as": "single",
+        "connection": "b64e7828.ceeb9",
+        "x": 470,
+        "y": 80,
+        "wires": [
+            [
+                "946fb178.45a87"
+            ]
+        ]
+    },
+    {
+        "id": "946fb178.45a87",
+        "type": "debug",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 644,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "66d0b72e.a3fb08",
+        "type": "comment",
+        "z": "3e384215.0790c6",
+        "name": "Retrieving all",
+        "info": "",
+        "x": 110,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e0e4c19.71adac",
+        "type": "inject",
+        "z": "3e384215.0790c6",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "b7b9ff48.899458"
+            ]
+        ]
+    },
+    {
+        "id": "b7b9ff48.899458",
+        "type": "function",
+        "z": "3e384215.0790c6",
+        "name": "Building query",
+        "func": "msg.search_query = {\n    \"q\":\"*:*\",\n    \"fq\":\"classification:asset\"\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 292,
+        "y": 280,
+        "wires": [
+            [
+                "946a8b70.859d1"
+            ]
+        ]
+    },
+    {
+        "id": "946a8b70.859d1",
+        "type": "wch-search",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "action": "search",
+        "as": "single",
+        "connection": "b64e7828.ceeb9",
+        "x": 470,
+        "y": 280,
+        "wires": [
+            [
+                "e0d112f6.25d99"
+            ]
+        ]
+    },
+    {
+        "id": "e0d112f6.25d99",
+        "type": "debug",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 644,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "85418206.77ecd",
+        "type": "comment",
+        "z": "3e384215.0790c6",
+        "name": "Retrieving all images",
+        "info": "",
+        "x": 130,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7df74993.aff7a8",
+        "type": "inject",
+        "z": "3e384215.0790c6",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "ee1dd290.0f0cb"
+            ]
+        ]
+    },
+    {
+        "id": "ee1dd290.0f0cb",
+        "type": "function",
+        "z": "3e384215.0790c6",
+        "name": "Building query",
+        "func": "msg.search_query = {\n    \"q\":\"*:*\",\n    \"fq\":[\"classification:asset\",\"tags:car\"]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 292,
+        "y": 380,
+        "wires": [
+            [
+                "36d406c9.cfe622"
+            ]
+        ]
+    },
+    {
+        "id": "36d406c9.cfe622",
+        "type": "wch-search",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "action": "search",
+        "as": "single",
+        "connection": "b64e7828.ceeb9",
+        "x": 470,
+        "y": 380,
+        "wires": [
+            [
+                "53e38078.178bb8"
+            ]
+        ]
+    },
+    {
+        "id": "53e38078.178bb8",
+        "type": "debug",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "false",
+        "x": 644,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "7ee5f0fc.2dbcd8",
+        "type": "comment",
+        "z": "3e384215.0790c6",
+        "name": "Retrieving all images tagged with car",
+        "info": " ",
+        "x": 180,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "ede1c2f2.caccd8",
+        "type": "inject",
+        "z": "3e384215.0790c6",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "e07ef87c.fae5c8"
+            ]
+        ]
+    },
+    {
+        "id": "e07ef87c.fae5c8",
+        "type": "function",
+        "z": "3e384215.0790c6",
+        "name": "Building query",
+        "func": "msg.search_query = {\"q\":\"*:*\"};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 292,
+        "y": 180,
+        "wires": [
+            [
+                "7b4a3a18.8b90f4"
+            ]
+        ]
+    },
+    {
+        "id": "7b4a3a18.8b90f4",
+        "type": "wch-search",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "action": "search",
+        "as": "multi",
+        "connection": "b64e7828.ceeb9",
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [],
+            [
+                "36437457.2b1374"
+            ]
+        ]
+    },
+    {
+        "id": "36437457.2b1374",
+        "type": "debug",
+        "z": "3e384215.0790c6",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload.id",
+        "x": 654,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a7842af2.5c3bb",
+        "type": "comment",
+        "z": "3e384215.0790c6",
+        "name": "Retrieving all event per result",
+        "info": "",
+        "x": 160,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "210d29bb-1f3b-43e5-b3fa-c6b1a07b3fa0"
+    }
+]

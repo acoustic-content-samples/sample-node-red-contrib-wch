@@ -1,0 +1,128 @@
+<!--
+ *******************************************************************************
+ * Copyright (c) 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************
+-->
+
+<script type="text/x-red" data-template-name="wch-search">
+    <div class="form-row">
+        <label for="node-input-connection"><i class="fa fa-plug"></i> Connection</label>
+        <input type="text" id="node-input-connection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-as"><i class="fa fa-sign-out"></i> Output</label>
+        <select id="node-input-as" style="width: 70%;">
+          <option value="single">as single message, contains the full response</option>
+          <option value="multi">as multi message, one for each result entry</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="wch-search">
+    <p>
+        This node supports the search API handler in IBM Watson Contnet Hub.
+    </p>
+    <p>
+        As of now this node supports only a very low level interaction with the
+        IBM Watson Content Hub search APIs. This node expects an object under
+        <code>msg.search_query</code> which defines the set of query parameter,
+        required to work with the search API.
+    </p>
+    <p>
+        <b>Example</b><br/>
+        Searching for everything
+
+        <code>
+        msg.search_query = {"q":"*:*"};
+        </code>
+    </p>
+    <p>
+        In case you are building a more complex search query which requires multiple
+        parameters with the same key the syntax would look like this:
+
+        <code>
+        msg.search_query = {
+            "q":"*:*",
+            "fq":["tags:dog","classification:content"]
+        };
+        </code>
+    </p>
+    <p>
+        The result can either be presented in a single message, which is exposed
+        on output 1 or if configured you can get a message per result entry
+        (element in the <code>documents</code> array of the response) on output 2.
+        The issued message also exposes the <code>msg.parts</code> information,
+        so it works nicely with the <code>join</code> node.
+    </p>
+    <p>
+        <b>Related resources</b>
+        <ul>
+        <li>
+        <a href="https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API"
+           target="_blank">IBM Watson Content Hub API</a>
+        </li>
+        </ul>
+    </p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('wch-search', {
+        category: 'Watson_Content_Hub',
+        color: '#4178BE',
+        defaults: {
+            name: {
+                value: "",
+                required: false
+            },
+            action: {
+                value: "search",
+                required: false
+            },
+            as: {
+                value: "single",
+                required: false
+            },
+            connection: {
+                value: "",
+                required: true,
+                type: "wch-connection"
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        paletteLabel: "Search",
+        icon: "search.png",
+        label: function() {
+            return (this.name || "Search");
+        },
+        oneditprepare: function() {
+            var node = this;
+            $("#node-input-as").on('change', function() {
+                switch (this.value) {
+                    case "multi":
+                        node.outputs=2;
+                        break;
+                    default:
+                        node.outputs=1;
+                        break;
+                }
+            });
+        }
+    });
+</script>

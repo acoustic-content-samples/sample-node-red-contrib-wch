@@ -1,0 +1,40 @@
+{
+  "name": "node-red-contrib-watson-content-hub",
+  "version": "0.1.15",
+  "description": "Node-RED nodes for Watson Comntent Hub integration",
+  "main": "node",
+  "scripts": {
+    "test": "echo \"No test specified\""
+  },
+  "keywords": [
+    "node-red",
+    "watson",
+    "wch",
+    "IBM"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "node-red": {
+    "version": ">=0.16.0",
+    "nodes": {
+      "wch-asset": "nodes/asset.js",
+      "wch-category": "nodes/category.js",
+      "wch-connection": "nodes/connection.js",
+      "wch-content": "nodes/content.js",
+      "wch-imageprofile": "nodes/imageprofile.js",
+      "wch-search": "nodes/search.js",
+      "wch-user": "nodes/user.js"
+    }
+  },
+  "author": "Stefan Koch <stefkoch@de.ibm.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "lodash": "^4.17.2",
+    "mime-types": "^2.1.14",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  }
+}

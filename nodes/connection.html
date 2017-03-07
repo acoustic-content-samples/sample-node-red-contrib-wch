@@ -1,0 +1,72 @@
+<!--
+ *******************************************************************************
+ * Copyright (c) 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************
+-->
+
+<script type="text/x-red" data-template-name="wch-connection">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="icon-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-tenantid"><i class="fa fa-users"></i> Tenant</label>
+        <input type="text" id="node-config-input-tenantid" placeholder="Tenant">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-user"><i class="fa fa-user"></i> Username</label>
+        <input type="text" id="node-config-input-user" placeholder="Username">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-password"><i class="fa fa-key"></i> Password</label>
+        <input type="password" id="node-config-input-password">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="wch-connection">
+    <p>
+        This node maintains the connection configuration for to
+        IBM Watson Content Hub.
+    </p>
+    <p>
+        The <b>Tenant</b> information is optional. By default the login
+        process will take the first available tenant for the given user.
+    </p>
+</script>
+
+
+
+<script type="text/javascript">
+    RED.nodes.registerType('wch-connection', {
+        category: 'config',
+        credentials: {
+            user: {type:"text"},
+            password: {type:"password"}
+        },
+        defaults: {
+            name: {
+                value: "",
+                required: false
+            },
+            tenantid: {
+                value: "",
+                required: false
+            }
+        },
+        label: function() {
+            return (this.name || "Watson Content Hub");
+        }
+    });
+</script>

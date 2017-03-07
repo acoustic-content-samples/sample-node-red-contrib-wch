@@ -1,0 +1,177 @@
+<!--
+ *******************************************************************************
+ * Copyright (c) 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************
+-->
+
+<script type="text/x-red" data-template-name="wch-category">
+    <div class="form-row">
+        <label for="node-input-connection"><i class="fa fa-plug"></i> Connection</label>
+        <input type="text" id="node-input-connection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-action"><i class="fa fa-pencil-square-o"></i> Operation</label>
+        <select id="node-input-action">
+          <option value="topic">Take the operation mode from msg.topic</option>
+          <option value="all">Retrieves all content categories</option>
+          <option value="get">Retrieves a content category</option>
+          <option value="children">Retrieves all children of a given content category</option>
+          <option value="create">Creates a content category</option>
+          <option value="update">Updates a content category</option>
+          <option value="delete">Deletes a content category</option>
+        </select>
+    </div>
+    <div class="form-row" id="extraconfig_id" style="display: none">
+        <label for="node-input-attrId"><i class="icon-bookmark"></i> Item ID</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-attrId" type="text"
+                       placeholder="category.id"
+                       style="width: 100%; margin-right: 0px; margin-left: 0px;"
+                       class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row" id="contextconfig" style="display: none">
+        <label for="node-input-context"><i class="fa fa-object-group"></i> Context</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-context" type="text" placeholder="category" style="width: 100%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row" id="extraconfig_parent" style="display: none">
+        <label for="node-input-attrParent"><i class="fa fa-sitemap"></i> Parent</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-attrParent" type="text"
+                       style="width: 100%; margin-right: 0px; margin-left: 0px;"
+                       class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="wch-category">
+    <p>
+        This node supports the category API handler in IBM Watson Contnet Hub.
+    </p>
+    <p>
+        Besides the individual operation options in the configuration dialog it
+        is also possible to pass in the operation by using the
+        <code>msg.topic</code> attribute. The allowed options are:
+
+        <ul>
+            <li><code>all</code></li>
+            <li><code>children</code></li>
+            <li><code>create</code></li>
+            <li><code>delete</code></li>
+            <li><code>get</code></li>
+            <li><code>update</code></li>
+        </ul>
+
+        In case the selected operation requires additional input the node assumes
+        by default, that this information can be found in an object stored under
+        <code>msg.category</code> attribute. In addition to that it is also possible to
+        configure the possible values in the configuration dialog
+    </p>
+    <p>
+        <b>Related resources</b>
+        <ul>
+        <li>
+        <a href="https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API"
+           target="_blank">IBM Watson Content Hub API</a>
+        </li>
+        </ul>
+    </p>
+</script>
+
+
+
+<script type="text/javascript">
+    RED.nodes.registerType('wch-category', {
+        category: 'Watson_Content_Hub',
+        color: '#4178BE',
+        defaults: {
+            name: {
+                value: "",
+                required: false
+            },
+            action: {
+                value: "all",
+                required: false
+            },
+            attrId: {
+                value: "",
+                required: false
+            },
+            context: {
+                value: "",
+                required: false
+            },
+            attrParent: {
+                value: "category.parent",
+                required: false
+            },
+            connection: {
+                value: "",
+                required: true,
+                type: "wch-connection"
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        paletteLabel: "Category",
+        icon: "category.png",
+        label: function() {
+            return (this.name || "Category");
+        },
+        oneditprepare: function() {
+            $("#node-input-action").on('change', function() {
+                switch (this.value) {
+                    case "children":
+                    case "delete":
+                    case "get":
+                        $("#extraconfig_id").show();
+                        $("#contextconfig").hide();
+                        $("#extraconfig_parent").hide();
+                        break;
+                    case "update":
+                        $("#extraconfig_id").show();
+                        $("#contextconfig").show();
+                        $("#extraconfig_parent").hide();
+                        break;
+                    case "create":
+                        $("#extraconfig_id").hide();
+                        $("#contextconfig").show();
+                        $("#extraconfig_parent").hide();
+                        break;
+                    default:
+                        $("#extraconfig_id").hide();
+                        $("#contextconfig").hide();
+                        $("#extraconfig_parent").hide();
+                        break;
+                }
+            });
+        }
+    });
+</script>

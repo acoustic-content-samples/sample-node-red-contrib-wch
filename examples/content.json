@@ -1,0 +1,320 @@
+[
+    {
+        "id": "579c43f3.9ddca4",
+        "type": "inject",
+        "z": "3228c46b.7c3fe4",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 100,
+        "wires": [
+            [
+                "934795f5.ba2b58"
+            ]
+        ]
+    },
+    {
+        "id": "c66bb6f.39843c8",
+        "type": "comment",
+        "z": "3228c46b.7c3fe4",
+        "name": "Retrieve all content items",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "934795f5.ba2b58",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "",
+        "connection": "b64e7828.ceeb9",
+        "action": "all",
+        "x": 280,
+        "y": 100,
+        "wires": [
+            [
+                "8f19f2b2.edffa"
+            ]
+        ]
+    },
+    {
+        "id": "8f19f2b2.edffa",
+        "type": "debug",
+        "z": "3228c46b.7c3fe4",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 430,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e1e50a3d.3cf5e8",
+        "type": "function",
+        "z": "3228c46b.7c3fe4",
+        "name": "Iterating the result",
+        "func": "for (var idx in msg.payload.items) {\n    node.send({\"topic\":\"delete\",\"content\":{\"id\":msg.payload.items[idx].id}})\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            [
+                "c7b197cd.c893a8"
+            ]
+        ]
+    },
+    {
+        "id": "c9a3e839.d6d148",
+        "type": "inject",
+        "z": "3228c46b.7c3fe4",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "a96d02bf.9e2248"
+            ]
+        ]
+    },
+    {
+        "id": "fbc5aca8.9b1008",
+        "type": "debug",
+        "z": "3228c46b.7c3fe4",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1f483fe4.eb0e6",
+        "type": "comment",
+        "z": "3228c46b.7c3fe4",
+        "name": "Delete all content items",
+        "info": "",
+        "x": 140,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a96d02bf.9e2248",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "Retrieve all content items",
+        "connection": "b64e7828.ceeb9",
+        "action": "all",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "e1e50a3d.3cf5e8"
+            ]
+        ]
+    },
+    {
+        "id": "c7b197cd.c893a8",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "deleting the content",
+        "connection": "b64e7828.ceeb9",
+        "action": "delete",
+        "x": 800,
+        "y": 200,
+        "wires": [
+            [
+                "fbc5aca8.9b1008"
+            ]
+        ]
+    },
+    {
+        "id": "2eff7da7.b6b78a",
+        "type": "comment",
+        "z": "3228c46b.7c3fe4",
+        "name": "Create a new content item",
+        "info": "",
+        "x": 150,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "49e8c198.90594",
+        "type": "inject",
+        "z": "3228c46b.7c3fe4",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 400,
+        "wires": [
+            [
+                "2ca00dca.1242e2"
+            ]
+        ]
+    },
+    {
+        "id": "2ca00dca.1242e2",
+        "type": "function",
+        "z": "3228c46b.7c3fe4",
+        "name": "Setting the creation context",
+        "func": "msg.content = {\n    \"name\" : \"test_\" + Date.now(),\n\n    \"elements\" :  {\n        \"test_label\" : \"sample text\",\n        \"test_image\" : \"0068e776-e327-484e-a29a-ef9aca65d1ce\",\n        \"test_link\" : \"http://www.google.de\",\n        \"test_toggle\" : true,\n        \"test_number\" : 2222\n        },\n    \"tags\" : [\"node-red-demo\"]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "af2aec16.90a1f8"
+            ]
+        ]
+    },
+    {
+        "id": "af2aec16.90a1f8",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "Creating the content item",
+        "connection": "b64e7828.ceeb9",
+        "context": "",
+        "typeId": "19e39170-8ce9-40ae-8a7c-bdcaa6e47780",
+        "attrId": "",
+        "action": "create",
+        "x": 610,
+        "y": 400,
+        "wires": [
+            [
+                "536a6f56.ab4ea"
+            ]
+        ]
+    },
+    {
+        "id": "536a6f56.ab4ea",
+        "type": "debug",
+        "z": "3228c46b.7c3fe4",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 830,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "ea841c3d.1ceb9",
+        "type": "comment",
+        "z": "3228c46b.7c3fe4",
+        "name": "Update a content item",
+        "info": "",
+        "x": 140,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "90540cd6.37cf08",
+        "type": "inject",
+        "z": "3228c46b.7c3fe4",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 500,
+        "wires": [
+            [
+                "c3763e44.b81588"
+            ]
+        ]
+    },
+    {
+        "id": "c3763e44.b81588",
+        "type": "function",
+        "z": "3228c46b.7c3fe4",
+        "name": "Setting the creation and update context",
+        "func": "msg.content = {\n    \"name\" : \"test_\" + Date.now(),\n\n    \"elements\" :  {\n        \"test_label\" : \"sample text\",\n        \"test_image\" : \"06e3f81d-35f4-45b0-8192-2e1bc88ae1a5\",\n        \"test_link\" : \"http://www.google.de\",\n        \"test_toggle\" : true,\n        \"test_number\" : 2222\n        },\n    \"tags\" : [\"node-red-demo\"]\n};\n\nmsg.update = {\n    \"elements\" :  {\n        \"test_label\" : \"updated sample text\",\n        \"test_number\" : 3333\n    }\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 500,
+        "wires": [
+            [
+                "cd120690.1ff92"
+            ]
+        ]
+    },
+    {
+        "id": "cd120690.1ff92",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "Creating the content item",
+        "connection": "b64e7828.ceeb9",
+        "context": "",
+        "typeId": "19e39170-8ce9-40ae-8a7c-bdcaa6e47780",
+        "attrId": "",
+        "action": "create",
+        "x": 370,
+        "y": 560,
+        "wires": [
+            [
+                "ca0fcc7b.9e3198"
+            ]
+        ]
+    },
+    {
+        "id": "288877a8.9347b8",
+        "type": "debug",
+        "z": "3228c46b.7c3fe4",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 830,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "ca0fcc7b.9e3198",
+        "type": "wch-content",
+        "z": "3228c46b.7c3fe4",
+        "name": "Update item",
+        "connection": "b64e7828.ceeb9",
+        "context": "update",
+        "typeId": "19e39170-8ce9-40ae-8a7c-bdcaa6e47780",
+        "attrId": "payload.id",
+        "action": "update",
+        "x": 630,
+        "y": 560,
+        "wires": [
+            [
+                "288877a8.9347b8"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

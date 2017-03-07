@@ -1,0 +1,205 @@
+<!--
+ *******************************************************************************
+ * Copyright (c) 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************
+-->
+
+<script type="text/x-red" data-template-name="wch-content">
+    <div class="form-row">
+        <label for="node-input-connection"><i class="fa fa-plug"></i> Connection</label>
+        <input type="text" id="node-input-connection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-action"><i class="fa fa-pencil-square-o"></i> Operation</label>
+        <select id="node-input-action" style="width: 70%;">
+          <option value="topic">Take the operation mode from msg.topic</option>
+          <option value="all">Retrieves all content items</option>
+          <option value="get">Retrieves a content item</option>
+          <option value="create">Creates a content item</option>
+          <option value="update">Updates a content item</option>
+          <option value="delete">Deletes a content item</option>
+          <option value="promote">Promotes a content item</option>
+          <option value="draft">Sets a content item into draft mode</option>
+          <option value="retire">Retieres a content item</option>
+        </select>
+    </div>
+    <div class="form-row" id="typeconfig" style="display: none">
+        <label for="node-input-typeId"><i class="fa fa-file-image-o"></i> Type</label>
+        <select id="node-input-typeId" style="width: 70%;">
+        </select>
+    </div>
+    <div class="form-row" id="contextconfig" style="display: none">
+        <label for="node-input-context"><i class="fa fa-object-group"></i> Context</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-context" type="text" placeholder="content" style="width: 100%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row" id="extraconfig" style="display: none">
+        <label for="node-input-attrId"><i class="icon-bookmark"></i> Item</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-attrId" type="text" placeholder="content.id" style="width: 100%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="wch-content">
+    <p>
+        This node provides access to content API in IBM Watson Content Hub.
+    </p>
+    <p>
+        Besides the individual operation options in the configuration dialog it
+        is also possible to pass in the required operation by using the
+        <code>msg.topic</code> attribute. The allowed options are:
+
+        <ul>
+            <li><code>all</code></li>
+            <li><code>create</code></li>
+            <li><code>delete</code></li>
+            <li><code>draft</code></li>
+            <li><code>get</code></li>
+            <li><code>promote</code></li>
+            <li><code>retire</code></li>
+            <li><code>update</code></li>
+        </ul>
+
+        In case the selected operation requires additional input the node assumes
+        by default, that this information can be found in an object stored under
+        <code>msg.content</code>. The content item type can be selected in the
+        configuration dialog (<b>NOTE:</b> the connection needs to be configured
+        before the node can fetch the existing types)
+    </p>
+    <p>
+        <b>Example</b><br/>
+        Assuming the type is configured, this snipped would create a content
+        item and sets the propery <code>test_label</code> and <code>test_image</code>.
+        The image reference needs to be a valid and existing asset reference.
+
+        <pre><code class="language-javascript">
+msg.content = {
+  "name" : "My sample content",
+  "elements" : {
+    "test_label" : "sample text",
+    "test_image" : "58c6e2b6-c04f-495d-b2a6-099c49a15b70"
+  },
+  "tags" : ["demo"]
+};
+        </code></pre>
+        The type can be overwritten by adding a <code>typeId</code> attribute to
+        the context object. The value needs to be a valid type id.
+    </p>
+    <p>
+        <b>Related resources</b>
+        <ul>
+        <li>
+        <a href="https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API"
+           target="_blank">IBM Watson Content Hub API</a>
+        </li>
+        </ul>
+    </p>
+
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('wch-content', {
+        category: 'Watson_Content_Hub',
+        color: '#4178BE',
+        defaults: {
+            name: {
+                value: "",
+                required: false
+            },
+            connection: {
+                value: "",
+                required: true,
+                type: "wch-connection"
+            },
+            context: {
+                value: "",
+                required: false
+            },
+            typeId: {
+                value: "",
+                required: false
+            },
+            attrId: {
+                value: "",
+                required: false
+            },
+            action: {
+                value: "get",
+                required: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        paletteLabel: "Content",
+        icon: "content.png",
+        label: function() {
+            return (this.name || "Content");
+        },
+        oneditprepare: function() {
+            var node = this;
+            $("#node-input-action").on('change', function() {
+                switch (this.value) {
+                    case "get":
+                    case "delete":
+                    case "promote":
+                    case "draft":
+                    case "retire":
+                        $("#typeconfig").hide();
+                        $("#contextconfig").hide();
+                        $("#extraconfig").show();
+                        break;
+                    case "update":
+                        $("#typeconfig").hide();
+                        $("#contextconfig").show();
+                        $("#extraconfig").show();
+                        break;
+                    case "create":
+                        $("#extraconfig").hide();
+                        $("#contextconfig").show();
+                        $("#typeconfig").show();
+                        $("#node-input-typeId")
+                            .append(new Option("Fetching data ...", "", false, false));
+
+                        $.getJSON('/wch/types/?conn='+node.connection,function(data) {
+                            $("#node-input-typeId").empty();
+                            $.each(data.items, function( index, value ) {
+                                var isSelected = node.typeId === value.id;
+                                $("#node-input-typeId").append(
+                                    new Option(value.name, value.id, isSelected, isSelected));
+                                });
+                        });
+                        break;
+                    default:
+                        $("#typeconfig").hide();
+                        $("#contextconfig").hide();
+                        $("#extraconfig").hide();
+                        break;
+                }
+            });
+        }
+    });
+</script>

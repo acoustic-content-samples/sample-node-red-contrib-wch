@@ -1,0 +1,99 @@
+[
+    {
+        "id": "9ee0321d.ad1e",
+        "type": "comment",
+        "z": "b4e5ac68.5c978",
+        "name": "Delete all image profiles",
+        "info": "",
+        "x": 140,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "3a183ba0.caad84",
+        "type": "inject",
+        "z": "b4e5ac68.5c978",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "2a91711c.30865e"
+            ]
+        ]
+    },
+    {
+        "id": "2a91711c.30865e",
+        "type": "wch-imageprofile",
+        "z": "b4e5ac68.5c978",
+        "name": "",
+        "action": "all",
+        "attrId": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "893172dd.264de"
+            ]
+        ]
+    },
+    {
+        "id": "e048e78f.26bce",
+        "type": "debug",
+        "z": "b4e5ac68.5c978",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 910,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "893172dd.264de",
+        "type": "function",
+        "z": "b4e5ac68.5c978",
+        "name": "iterate results",
+        "func": "for (var idx in msg.payload.items) {\n    node.send({\"payload\":msg.payload.items[idx].id});\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "c970fe96.9a9a98"
+            ]
+        ]
+    },
+    {
+        "id": "c970fe96.9a9a98",
+        "type": "wch-imageprofile",
+        "z": "b4e5ac68.5c978",
+        "name": "",
+        "action": "delete",
+        "attrId": "payload",
+        "context": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 740,
+        "y": 280,
+        "wires": [
+            [
+                "e048e78f.26bce"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

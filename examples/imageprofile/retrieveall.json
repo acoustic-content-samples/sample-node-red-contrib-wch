@@ -1,0 +1,66 @@
+[
+    {
+        "id": "c6cefdef.c721a",
+        "type": "comment",
+        "z": "b4e5ac68.5c978",
+        "name": "Retrieve all image profiles",
+        "info": "",
+        "x": 150,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f15cc173.a3d2b8",
+        "type": "inject",
+        "z": "b4e5ac68.5c978",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "96ee811d.062be"
+            ]
+        ]
+    },
+    {
+        "id": "96ee811d.062be",
+        "type": "wch-imageprofile",
+        "z": "b4e5ac68.5c978",
+        "name": "",
+        "action": "all",
+        "attrId": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "6d83461f.a1f"
+            ]
+        ]
+    },
+    {
+        "id": "6d83461f.a1f",
+        "type": "debug",
+        "z": "b4e5ac68.5c978",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 540,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

@@ -1,0 +1,82 @@
+[
+    {
+        "id": "f6430c45.7138c8",
+        "type": "comment",
+        "z": "b4e5ac68.5c978",
+        "name": "Create an image profile",
+        "info": "",
+        "x": 140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "20fa4b3a.4f5df4",
+        "type": "inject",
+        "z": "b4e5ac68.5c978",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "cac46517.ea5d8"
+            ]
+        ]
+    },
+    {
+        "id": "c811adc8.a450a8",
+        "type": "wch-imageprofile",
+        "z": "b4e5ac68.5c978",
+        "name": "Create Image profile",
+        "action": "create",
+        "attrId": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "15e6d062.de0db"
+            ]
+        ]
+    },
+    {
+        "id": "15e6d062.de0db",
+        "type": "debug",
+        "z": "b4e5ac68.5c978",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 760,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "cac46517.ea5d8",
+        "type": "function",
+        "z": "b4e5ac68.5c978",
+        "name": "setup creation context",
+        "func": "msg.profile = {\n    \"name\" : \"my profile\",\n    \"dimensions\" : [\n        {\"label\" : \"Mobile\",\n         \"key\" : \"mobile\",\n         \"width\" : 200,\n         \"height\" : 300,\n         \"description\" : \"\"}\n    ]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "c811adc8.a450a8"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

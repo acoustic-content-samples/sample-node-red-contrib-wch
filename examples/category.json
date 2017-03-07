@@ -1,0 +1,466 @@
+[
+    {
+        "id": "e2588eca.3dcca8",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "retrieve all taxonomies items",
+        "action": "topic",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "ad173637.dc8bb"
+            ]
+        ]
+    },
+    {
+        "id": "881e2976.aa257",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "retrieve all taxonimies items",
+        "action": "topic",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 340,
+        "y": 80,
+        "wires": [
+            [
+                "56cec3b4.59ef6c"
+            ]
+        ]
+    },
+    {
+        "id": "5195de92.e5bab8",
+        "type": "inject",
+        "z": "2b60b087.5b12f",
+        "name": "Trigger",
+        "topic": "all",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "881e2976.aa257"
+            ]
+        ]
+    },
+    {
+        "id": "56cec3b4.59ef6c",
+        "type": "debug",
+        "z": "2b60b087.5b12f",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 570,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a71d5b5f.b14cd8",
+        "type": "inject",
+        "z": "2b60b087.5b12f",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "326098be.812c38"
+            ]
+        ]
+    },
+    {
+        "id": "326098be.812c38",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "set the creation context",
+        "func": "msg.category = {  \"name\" : \"sample\" ,\"parent\":undefined};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 330,
+        "y": 280,
+        "wires": [
+            [
+                "630f81e0.1afe2"
+            ]
+        ]
+    },
+    {
+        "id": "651a3ce0.0f8974",
+        "type": "debug",
+        "z": "2b60b087.5b12f",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 790,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "630f81e0.1afe2",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "create taxonomy",
+        "action": "create",
+        "attrId": "",
+        "context": "",
+        "attrParent": "category.parent",
+        "connection": "b64e7828.ceeb9",
+        "x": 590,
+        "y": 280,
+        "wires": [
+            [
+                "651a3ce0.0f8974"
+            ]
+        ]
+    },
+    {
+        "id": "2f13092e.d486b6",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "Set create and update context",
+        "func": "msg.category = {  \"name\" : \"Sample 2\" ,\"parent\":undefined};\nmsg.updated = \"Updated Sample 2\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 380,
+        "wires": [
+            [
+                "5b79f849.8fb06"
+            ]
+        ]
+    },
+    {
+        "id": "5b79f849.8fb06",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "Create taxonomy",
+        "action": "create",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 610,
+        "y": 380,
+        "wires": [
+            [
+                "2c5f346.04864cc"
+            ]
+        ]
+    },
+    {
+        "id": "2c5f346.04864cc",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "Update taxonomy",
+        "action": "update",
+        "attrId": "payload.id",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 830,
+        "y": 380,
+        "wires": [
+            [
+                "647b9f7a.cd02a8"
+            ]
+        ]
+    },
+    {
+        "id": "647b9f7a.cd02a8",
+        "type": "debug",
+        "z": "2b60b087.5b12f",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 1010,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "2b602a60.c812e6",
+        "type": "comment",
+        "z": "2b60b087.5b12f",
+        "name": "Get all taxonimies",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cc3e7754.9c3628",
+        "type": "inject",
+        "z": "2b60b087.5b12f",
+        "name": "Trigger",
+        "topic": "all",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "e2588eca.3dcca8"
+            ]
+        ]
+    },
+    {
+        "id": "ff34f7fd.090868",
+        "type": "debug",
+        "z": "2b60b087.5b12f",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 930,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b403054.09f23f8",
+        "type": "comment",
+        "z": "2b60b087.5b12f",
+        "name": "Delete all taxonomies",
+        "info": "",
+        "x": 140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ad173637.dc8bb",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "iterate results",
+        "func": "for (var idx in msg.payload.items) {\n    node.send({\"topic\":\"delete\",\"category\":{\"id\":msg.payload.items[idx].id}})\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "f177909.65ca7f"
+            ]
+        ]
+    },
+    {
+        "id": "f177909.65ca7f",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "delete category",
+        "action": "topic",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 760,
+        "y": 180,
+        "wires": [
+            [
+                "ff34f7fd.090868"
+            ]
+        ]
+    },
+    {
+        "id": "a7e53802.9cb068",
+        "type": "comment",
+        "z": "2b60b087.5b12f",
+        "name": "Create a taxonomy",
+        "info": "",
+        "x": 130,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6af553bb.c5d654",
+        "type": "inject",
+        "z": "2b60b087.5b12f",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "2f13092e.d486b6"
+            ]
+        ]
+    },
+    {
+        "id": "b2532d52.6af718",
+        "type": "comment",
+        "z": "2b60b087.5b12f",
+        "name": "Create and update a taxonomy",
+        "info": "",
+        "x": 170,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "981ac15c.2287a",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "Set create and update context",
+        "func": "msg.category = {  \"name\" : \"Sample 3\" ,\"parent\":undefined};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [
+                "b8d02995.e3a82"
+            ]
+        ]
+    },
+    {
+        "id": "b8d02995.e3a82",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "Create taxonomy",
+        "action": "create",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 610,
+        "y": 480,
+        "wires": [
+            [
+                "ac54ffb.47696",
+                "b27682f5.a152f8"
+            ]
+        ]
+    },
+    {
+        "id": "b27682f5.a152f8",
+        "type": "debug",
+        "z": "2b60b087.5b12f",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 950,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "51011b52.a1991c",
+        "type": "inject",
+        "z": "2b60b087.5b12f",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "981ac15c.2287a"
+            ]
+        ]
+    },
+    {
+        "id": "14a98504.5b967b",
+        "type": "comment",
+        "z": "2b60b087.5b12f",
+        "name": "Create a simple category hierarchy",
+        "info": "",
+        "x": 170,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ac54ffb.47696",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "Set create and update context",
+        "func": "msg.category = {  \"name\" : \"Parent\" ,\"parent\":msg.payload.id};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 540,
+        "wires": [
+            [
+                "eaa9c717.68a4b"
+            ]
+        ]
+    },
+    {
+        "id": "eaa9c717.68a4b",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "Create taxonomy",
+        "action": "create",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [
+                "fcc83c76.cb87a",
+                "b27682f5.a152f8"
+            ]
+        ]
+    },
+    {
+        "id": "fcc83c76.cb87a",
+        "type": "function",
+        "z": "2b60b087.5b12f",
+        "name": "Set create and update context",
+        "func": "msg.category = {  \"name\" : \"Child\" ,\"parent\":msg.payload.id};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 470,
+        "y": 600,
+        "wires": [
+            [
+                "9fe36653.607b7"
+            ]
+        ]
+    },
+    {
+        "id": "9fe36653.607b7",
+        "type": "wch-category",
+        "z": "2b60b087.5b12f",
+        "name": "Create taxonomy",
+        "action": "create",
+        "attrId": "",
+        "attrParent": "",
+        "connection": "b64e7828.ceeb9",
+        "x": 730,
+        "y": 600,
+        "wires": [
+            [
+                "b27682f5.a152f8"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

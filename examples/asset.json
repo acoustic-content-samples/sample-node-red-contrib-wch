@@ -1,0 +1,248 @@
+[
+    {
+        "id": "2a7520b2.695e58",
+        "type": "wch-asset",
+        "z": "4e2718e5.c6046",
+        "name": "Fetching all assets",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "",
+        "context": "",
+        "action": "all",
+        "x": 370,
+        "y": 100,
+        "wires": [
+            [
+                "f02900cb.e6b94"
+            ]
+        ]
+    },
+    {
+        "id": "5549e0a6.b27918",
+        "type": "inject",
+        "z": "4e2718e5.c6046",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "2a7520b2.695e58"
+            ]
+        ]
+    },
+    {
+        "id": "f02900cb.e6b94",
+        "type": "debug",
+        "z": "4e2718e5.c6046",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 550,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "6a3a7573.74cddc",
+        "type": "comment",
+        "z": "4e2718e5.c6046",
+        "name": "Retrieving all assets",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4b191a93.58e944",
+        "type": "comment",
+        "z": "4e2718e5.c6046",
+        "name": "Create a new asset",
+        "info": "",
+        "x": 150,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f6372ad0.f596d",
+        "type": "inject",
+        "z": "4e2718e5.c6046",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "48a0d19d.7e6b28"
+            ]
+        ]
+    },
+    {
+        "id": "f32ba516.c14c48",
+        "type": "wch-asset",
+        "z": "4e2718e5.c6046",
+        "name": "create the asset",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "",
+        "context": "",
+        "action": "create",
+        "x": 820,
+        "y": 200,
+        "wires": [
+            [
+                "19abdabf.552f95"
+            ]
+        ]
+    },
+    {
+        "id": "19abdabf.552f95",
+        "type": "debug",
+        "z": "4e2718e5.c6046",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 990,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "95adbc20.52e868",
+        "type": "function",
+        "z": "4e2718e5.c6046",
+        "name": "setting creation context",
+        "func": "msg.asset = {\n    \"name\":\"node-red.png\",\n    \"tags\" : [\"demo\",\"icon\"]\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 200,
+        "wires": [
+            [
+                "f32ba516.c14c48"
+            ]
+        ]
+    },
+    {
+        "id": "18879d86.ddaffa",
+        "type": "function",
+        "z": "4e2718e5.c6046",
+        "name": "Iterating results",
+        "func": "for (var idx in msg.payload.items) {\n    node.send({\"topic\":\"delete\",\"asset\":{\"id\":msg.payload.items[idx].id}})\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 580,
+        "y": 300,
+        "wires": [
+            [
+                "eb128b53.fd1918"
+            ]
+        ]
+    },
+    {
+        "id": "eb128b53.fd1918",
+        "type": "wch-asset",
+        "z": "4e2718e5.c6046",
+        "name": "Delete asset",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "",
+        "context": "",
+        "action": "delete",
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "cfa675d3.398208"
+            ]
+        ]
+    },
+    {
+        "id": "225354e8.3ddc1c",
+        "type": "inject",
+        "z": "4e2718e5.c6046",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 170,
+        "y": 300,
+        "wires": [
+            [
+                "ce05e588.8be3e8"
+            ]
+        ]
+    },
+    {
+        "id": "cfa675d3.398208",
+        "type": "debug",
+        "z": "4e2718e5.c6046",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 930,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "491da275.d86ca4",
+        "type": "comment",
+        "z": "4e2718e5.c6046",
+        "name": "Delete all assets",
+        "info": "",
+        "x": 140,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ce05e588.8be3e8",
+        "type": "wch-asset",
+        "z": "4e2718e5.c6046",
+        "name": "Fetching all assets",
+        "connection": "b64e7828.ceeb9",
+        "attrId": "asset.id",
+        "action": "all",
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "18879d86.ddaffa"
+            ]
+        ]
+    },
+    {
+        "id": "48a0d19d.7e6b28",
+        "type": "http request",
+        "z": "4e2718e5.c6046",
+        "name": "fetching an image",
+        "method": "GET",
+        "ret": "bin",
+        "url": "http://nodered.org/images/node-red-title-flow.png",
+        "tls": "",
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "95adbc20.52e868"
+            ]
+        ]
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]

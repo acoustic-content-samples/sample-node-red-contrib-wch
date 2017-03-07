@@ -1,0 +1,66 @@
+[
+    {
+        "id": "bdf5103e.d5f4d8",
+        "type": "comment",
+        "z": "45acd74c.82a0d",
+        "name": "Retrieve all users",
+        "info": "",
+        "x": 140,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8ef3834d.5699f8",
+        "type": "inject",
+        "z": "45acd74c.82a0d",
+        "name": "Trigger",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "x": 150,
+        "y": 200,
+        "wires": [
+            [
+                "714ac7db.93513"
+            ]
+        ]
+    },
+    {
+        "id": "714ac7db.93513",
+        "type": "wch-user",
+        "z": "45acd74c.82a0d",
+        "name": "",
+        "action": "all",
+        "attrId": "user.id",
+        "connection": "b64e7828.ceeb9",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "3cb1e9a6.fe3126"
+            ]
+        ]
+    },
+    {
+        "id": "3cb1e9a6.fe3126",
+        "type": "debug",
+        "z": "45acd74c.82a0d",
+        "name": "debug",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 490,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b64e7828.ceeb9",
+        "type": "wch-connection",
+        "z": "",
+        "name": "Sample Connection",
+        "tenantid": "82b72d66-7d09-4ed9-8d3b-a71f5d94ff1e"
+    }
+]
