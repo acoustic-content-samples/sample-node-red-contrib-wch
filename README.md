@@ -1,6 +1,6 @@
 ## Node-RED integration with IBM Watson Content Hub
 
-[![Build Status](https://travis.ibm.com/DX/demo-node-red-contrib-wch.svg?token=gjK92buPh5ZGufWuPzeg&branch=master)](https://travis.ibm.com/DX/demo-node-red-contrib-wch)
+[![Build Status](https://travis-ci.org/ibm-wch/sample-node-red-contrib-wch.svg?branch=master)](https://travis-ci.org/ibm-wch/sample-node-red-contrib-wch)
 
 This module provides a set of [Node-RED](http://nodered.org) nodes which integrate with
 IBM Watson Content Hub. The main goal of these nodes it to make it even simpler
@@ -33,15 +33,15 @@ THis section describes a very basic scenario how you can make sure the IBM Watso
 
 3. Wire the nodes as outlined on the picture
 
-    ![Sample flow](./doc/images/flow.png)
+    ![Sample flow](https://raw.githubusercontent.com/ibm-wch/sample-node-red-contrib-wch/master/doc/images/flow.png)
 
 4. Do a double-click on the Users node to enter the configuration dialog
 
-    ![Config dialog](./doc/images/config.png)
+    ![Config dialog](https://raw.githubusercontent.com/ibm-wch/sample-node-red-contrib-wch/master/doc/images/config.png)
 
 5. Click on the edit icon on the Connection entry in the configuration dialog and add in your IBM ID credentials
 
-    ![Config credentials](./doc/images/config_user.png)
+    ![Config credentials](https://raw.githubusercontent.com/ibm-wch/sample-node-red-contrib-wch/master/doc/images/config_user.png)
 
     > __NOTE__ It is recommended to add a name whoch makes it easier to identify the configuration
 
