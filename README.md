@@ -1,1 +1,2 @@
-# sample-node-red-contrib-wch
+# Node-RED integration with Watson Content Hub
+
