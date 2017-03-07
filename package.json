@@ -1,7 +1,7 @@
 {
   "name": "node-red-contrib-watson-content-hub",
-  "version": "0.1.17",
-  "description": "Node-RED nodes for Watson Comntent Hub integration",
+  "version": "0.1.18",
+  "description": "Node-RED nodes for Watson Content Hub integration",
   "main": "node",
   "scripts": {
     "test": "echo \"No test specified\""
