@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "6"
+deploy:
+    provider: npm
+    on:
+        branch: master
+        tags: true
