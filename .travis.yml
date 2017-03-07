@@ -1,9 +1,11 @@
-
 language: node_js
 node_js:
-  - "6"
+- '6'
 deploy:
-    provider: npm
-    on:
-        branch: master
-        tags: true
+  provider: npm
+  email: stefkoch@de.ibm.com
+  api_key:
+    secure: AtQQ2+doaJdSV8iqpa6oMDF5bHmi6bbRW9UybYjNPZuc5qAqZa/HuOjp/lRRGHwTTBwfejAMTY1Q+Mh1nGakV4v1pxCnnLNYHXUk0gS+7ynVgZPb/xuYhdo/Igxim00lsMY0UKpOptHHVDHO/UPLp69QhfsKvYRUYzrMgmBx0oKvqaUhUf7uOy7G/MwiVMdt8RJZ7f8gLcbSdnRvdpBSBlh8GMy+sjTeCEXpStGVbm0Lm5njRMW4GoElMYxdbs7M7PTgyES4gYb9Wa91sqhqPkv8HshT1fIDrm2Q2pK9wINLD+cuy6LlEeuJlCCaurNSr6OBVOPBIh75AvtCl2Ab8km/lOkewbbc1uZc0gnRan69E56QCCSHhsfPJAh1orDzXoW3YfP5/6U0YeDcMTLYFQn4ooC8lHQ6e2Zmif0r37kzjzU0qYNEPPuWnyapvbX+sakDY1ERnFdO0l5ExPOiS9AaY6LOoWL1z8b6xYBJB2Sl7g5JMBbiM6VVE4aY93H8b5aNmmKq9CL5CKjeoz/gtDejnxaoSP8utpRY3qO/a7RGxTP9CDhkveryyo5KcPrY3Ois7LiHf0UznnKhE02Uujgev/VB67/bWvabfiAuHOTVQjz6sbGgY+oav0Lvc9FTuNLJrXfP8GkrHS6AA3O6xjE9veKN8JyxYNM6BaPYRMM=
+  on:
+    tags: true
+    repo: ibm-wch/sample-node-red-contrib-wch
