@@ -60,6 +60,6 @@ Hub. As this is  a very early version, there is not a full coverage of all REST
 calls provided by IBM Watson Content Hub, but basic CRUD scenarios are implemented.
 
 To get a better understanding how to work with the Node-RED nodes have a look
-at the [examples folder](examples)
+at the [examples folder](https://github.com/ibm-wch/sample-node-red-contrib-wch/tree/master/examples)
 
 [Content Hub API]: https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API "IBM Watson Content Hub API"
