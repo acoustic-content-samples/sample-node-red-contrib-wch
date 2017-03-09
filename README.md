@@ -5,7 +5,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dt/node-red-contrib-watson-content-hub.svg)](https://www.npmjs.com/package/node-red-contrib-watson-content-hub)
 
 This module provides a set of [Node-RED](http://nodered.org) nodes which integrate with
-IBM Watson Content Hub. The main goal of these nodes it to make it even simpler
+IBM Watson Content Hub. The main goal of these nodes is to make it even simpler
 to integrate with IBM Watson Content Hub, as all [API][Content Hub API] calls
 are nicely wrapped by the given nodes.
 
@@ -27,11 +27,11 @@ Restart node-red and do a refresh in the browser editor UI, to see the newly ins
 
 ### Getting started
 
-THis section describes a very basic scenario how you can make sure the IBM Watson Content Hub integration with Node-RED is working. We assume the extension is installed as described earlier.
+This section describes a very basic scenario how you can make sure the IBM Watson Content Hub integration with Node-RED is working. We assume the extension is installed as described earlier.
 
 1. Go to the node-red editor UI (ie http://localhost:1880/)
 
-2. Add an inject input node a debug output node and a User node from the Watson_Content_Hub supportedActions
+2. Add an inject input node, a debug output node and a User node from the Watson_Content_Hub supportedActions
 
 3. Wire the nodes as outlined on the picture
 
@@ -45,7 +45,7 @@ THis section describes a very basic scenario how you can make sure the IBM Watso
 
     ![Config credentials](https://raw.githubusercontent.com/ibm-wch/sample-node-red-contrib-wch/master/doc/images/config_user.png)
 
-    > __NOTE__ It is recommended to add a name whoch makes it easier to identify the configuration
+    > __NOTE__ It is recommended to add a name whrioch makes it easier to identify the configuration
 
 6. Select the Add button to submit your input
 
