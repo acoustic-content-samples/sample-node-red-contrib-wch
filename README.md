@@ -65,3 +65,23 @@ To get a better understanding how to work with the Node-RED nodes have a look
 at the [examples folder](https://github.com/ibm-wch/sample-node-red-contrib-wch/tree/master/examples)
 
 [Content Hub API]: https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API "IBM Watson Content Hub API"
+
+### Adding IBM Watson Content Hub nodes to your IBM Bluemix Node-RED boilerplate
+
+If you want to make use of this integration you have to run a Node-RED process somewhere. One very nice way to host this would be to use [IBM Bluemix](http://www.bluemix.net). This description provides you with the required steps on how you can add the IBM Watson Content Hub nodes into your existing Node-RED boilerplate.
+
+1. Navigate to your [IBM Bluemix Dashboard](http://www.bluemix.net) and select the Node-RED boilerplate app
+
+2. On the overview page look for a widget called __Continuous delivery__. Assuming your toolchain integration is not yet setup click on the Enable button and follow the steps in the wizard.
+
+3. Now you should have a new [GitHub](http://github.com) repository which reflects your Node-RED boilerplate application.
+
+4. Update the ```package.json``` and add the following entry to the ```dependencies``` section
+    ```
+"node-red-contrib-watson-content-hub":"0.x"
+    ```
+    > __NOTE:__ The position inside of the ```dependencies``` section does not matter, just pay attention to set the colon at the right position
+
+5.  Commit your change and wait. Bluemix now gets informed about the change and your Node-RED boilerplate app gets restarted. This process may take up to 5 minutes, even if the application in your [IBM Bluemix Dashboard](http://www.bluemix.net) tells you it is started already.
+
+> __ATTENTION__ Make sure your Node-RED application has a username and password set, because otherwise your IBM Watson Content Hub account is open to everybody.
