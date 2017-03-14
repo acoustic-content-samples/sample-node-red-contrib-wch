@@ -80,6 +80,7 @@ If you want to make use of this integration you have to run a Node-RED process s
     ```
 "node-red-contrib-watson-content-hub":"0.x"
     ```
+
     > __NOTE:__ The position inside of the ```dependencies``` section does not matter, just pay attention to set the colon at the right position
 
 5.  Commit your change and wait. Bluemix now gets informed about the change and your Node-RED boilerplate app gets restarted. This process may take up to 5 minutes, even if the application in your [IBM Bluemix Dashboard](http://www.bluemix.net) tells you it is started already.
