@@ -77,6 +77,7 @@ If you want to make use of this integration you have to run a Node-RED process s
 3. Now you should have a new [GitHub](http://github.com) repository which reflects your Node-RED boilerplate application.
 
 4. Update the ```package.json``` and add the following entry to the ```dependencies``` section
+
     ```
 "node-red-contrib-watson-content-hub":"0.x"
     ```
