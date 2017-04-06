@@ -16,9 +16,16 @@
 
 module.exports = function(request) {
 
+    function _triggerSearch(query) {
+        return request("GET","/authoring/v1/search",
+                {"headers" : {"Content-Type" : "application/json"}})(query,
+            {});
+    }
+
     return {
         "search" : function(query) {
-            return request("GET","/authoring/v1/search",{"headers" : {"Content-Type" : "application/json"}})(query,
+            return request("GET","/authoring/v1/search",
+                    {"headers" : {"Content-Type" : "application/json"}})(query,
                 {});
         },
     };
