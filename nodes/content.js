@@ -55,6 +55,10 @@ module.exports = function(RED) {
                         body.tags = context.tags;
                     }
 
+                    if (context.locale !== undefined) {
+                        body.locale = context.locale;
+                    }
+
                     return handleElements(node,connection.client(),context.elements,body,msg);
                 });
             }
