@@ -51,7 +51,7 @@ module.exports = function(request) {
         },
 
         "get" : function(id) {
-            return request("GET","/authoring/v1/types/"+id,{"headers" : {"Content-Type" : "application/json"}})({},
+            return request("GET","/authoring/v1/types/"+id,{"headers" : {"Content-Type" : "application/json"}})({"version":"1.0"},
                 {});
         },
 
