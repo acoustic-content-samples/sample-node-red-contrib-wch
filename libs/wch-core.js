@@ -82,8 +82,9 @@ module.exports = function(url,opts) {
             headers["x-ibm-dx-tenant-id"] = tenant;
         }
 
-        return makeRequest("GET","/api/login/v1/basicauth",{"headers":headers,"resolveWithFullResponse": true})({})
+        return makeRequest("GET","/login/v1/basicauth",{"headers":headers,"resolveWithFullResponse": true})({})
             .then(function(response) {
+                // console.log(JSON.stringify(response,null,4))
                 if (tenant !== undefined && tenant.length > 0) {
                     // TODO, this should come from the body
                     baseOptions.url = response.headers['x-ibm-dx-tenant-base-url'];

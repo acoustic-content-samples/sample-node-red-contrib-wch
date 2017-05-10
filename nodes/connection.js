@@ -25,7 +25,7 @@ module.exports = function(RED) {
         var node = this;
 
         // This is used for doing internal testing
-        var contenthuburl = 'https://my.digitalexperience.ibm.com';
+        var contenthuburl = config.apiurl || 'https://my.digitalexperience.ibm.com';
         if (process.env.CONTENTHUB !== undefined) {
             contenthuburl = process.env.CONTENTHUB;
         }
