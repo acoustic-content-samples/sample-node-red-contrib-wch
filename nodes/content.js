@@ -159,7 +159,6 @@ function handleImage(client,elementName,assetID,result) {
     return client.asset.get(assetID).then(function (data) {
         result[elementName] = {
             "asset" : {
-                "id" : data.id,
                 "resourceUri":"",
                 "fileName":data.fileName,
                 "fileSize":data.fileSize,
