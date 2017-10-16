@@ -59,6 +59,8 @@ module.exports = function(RED) {
                         body.locale = context.locale;
                     }
 
+                    console.log("I'm here");
+
                     return handleElements(node,connection.client(),context.elements,body,msg);
                 });
             }
@@ -96,6 +98,13 @@ function handleElements(node,client,elements,result,msg) {
                                 case "text":
                                 case "toggle":
                                     handler.push(handleSimpleType(client,
+                                        elementName,
+                                        elementValue,
+                                        transformed,
+                                        elementType.properties.elementType.default));
+                                    break;
+                                case "location":
+                                    handler.push(handleLocation(client,
                                         elementName,
                                         elementValue,
                                         transformed,
@@ -146,6 +155,15 @@ function handleLink(client,elementName,value,result,type) {
     return;
 }
 
+function handleLocation(client,elementName,value,result,type) {
+    console.log(elementName);
+    console.log(value);
+    console.log(result);
+    console.log(type);
+    result[elementName] = {"latitude" : value.latitude, "longitude" : value.longitude, "elementType" : type};
+    return;
+}
+
 function handleCategories(client,elementName,value,result,type) {
     if (Array.isArray(value)) {
         result[elementName] = {"categoryIds" : value, "elementType" : type};
@@ -159,12 +177,14 @@ function handleImage(client,elementName,assetID,result) {
     return client.asset.get(assetID).then(function (data) {
         result[elementName] = {
             "asset" : {
-                "resourceUri":"",
+                "id" : data.id,
+                "resourceUri":"/authoring/v1/resources/" + data.resource,
                 "fileName":data.fileName,
                 "fileSize":data.fileSize,
                 "mediaType":data.mediaType},
             "renditions" : data.renditions,
             "elementType" : "image"};
+
 
         if (result[elementName].renditions !== undefined) {
             for (var attrName in result[elementName].renditions) {
@@ -172,8 +192,10 @@ function handleImage(client,elementName,assetID,result) {
                     result[elementName].renditions[attrName].renditionId =
                         result[elementName].renditions[attrName].id;
                 }
+                delete result[elementName].renditions[attrName].id;
             }
         }
+
         return;
     }).catch(function(error) {
         throw new Error("Unable to retrieve asset " + assetID);

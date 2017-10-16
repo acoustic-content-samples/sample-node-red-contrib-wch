@@ -37,7 +37,7 @@ module.exports = function(RED) {
                 client.search.search(msg.search_query).then(function(data) {
                     if (config.as === "multi") {
                         msg.payload = data;
-                        var elements = data.documents;
+                        var elements = data.documents || [];
                         for (var idx=0;idx < elements.length; idx++) {
                             // add support for the join node
                             var parts = {"id" : node.id,

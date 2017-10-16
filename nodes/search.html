@@ -48,20 +48,36 @@
         <b>Example</b><br/>
         Searching for everything
 
-        <code>
-        msg.search_query = {"q":"*:*"};
-        </code>
+        <pre><code class="language-javascript">
+msg.search_query = {
+    "q":"*:*"
+};
+        </code></pre>
     </p>
     <p>
         In case you are building a more complex search query which requires multiple
         parameters with the same key the syntax would look like this:
 
-        <code>
-        msg.search_query = {
-            "q":"*:*",
-            "fq":["tags:dog","classification:content"]
-        };
-        </code>
+        <pre><code class="language-javascript">
+msg.search_query = {
+    "q":"*:*",
+    "fq":["tags:dog","classification:content"]
+};
+        </code></pre>
+    </p>
+    <p>
+        As not the entire content item document is indexed in the search schema but you still
+        have the need of getting all information you may want to add the <code>fl</code>
+        parameter to your search query
+
+        For example
+        <pre><code class="language-javascript">
+msg.search_query = {
+    "q":"*:*",
+    "fl":"document:[json]"
+};
+        </code></pre>
+
     </p>
     <p>
         The result can either be presented in a single message, which is exposed
