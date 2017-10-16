@@ -1,0 +1,167 @@
+<!--
+ *******************************************************************************
+ * Copyright (c) 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************
+-->
+
+<script type="text/x-red" data-template-name="wch-site">
+    <div class="form-row">
+        <label for="node-input-connection"><i class="fa fa-plug"></i> Connection</label>
+        <input type="text" id="node-input-connection">
+    </div>
+    <div class="form-row">
+        <label for="node-input-action"><i class="fa fa-pencil-square-o"></i> Operation</label>
+        <select id="node-input-action" style="width: 70%;">
+          <option value="topic">Take the operation mode from msg.topic</option>
+          <option value="all">All sites</option>
+          <option value="get">Get site metadata</option>
+          <option value="pages">Page hirarchy</option>
+          <option value="deletePage">Deletes a page</option>
+        </select>
+    </div>
+
+    <div class="form-row" id="extraconfig_id" style="display: none">
+        <label for="node-input-attrId"><i class="icon-bookmark"></i> Site ID</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-attrId" type="text"
+                       placeholder="site.id"
+                       style="width: 100%; margin-right: 0px; margin-left: 0px;"
+                       class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row" id="contextconfig" style="display: none">
+        <label for="node-input-context"><i class="fa fa-object-group"></i> Context</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-context" type="text" placeholder="asset" style="width: 100%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+    <div class="form-row" id="extraconfig_name" style="display: none">
+        <label for="node-input-attrName"><i class="icon-bookmark"></i> Item Name</label>
+        <div style="width: 70%; margin-right: 0px; margin-left: 0px;" class="red-ui-typedInput-container">
+            <button tabindex="0"><span>msg.</span></button>
+            <div class="red-ui-typedInput-input" style="left: 55px; right: 0px;">
+                <input id="node-input-attrName" type="text"
+                       style="width: 100%; margin-right: 0px; margin-left: 0px;"
+                       class="red-ui-typedInput">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+
+
+<script type="text/x-red" data-help-name="wch-site">
+    <p>
+        This node supports the Sites API handler in IBM Watson Contnet Hub.
+    </p>
+    <p>
+        Besides the individual operation options in the configuration dialog it
+        is also possible to pass in the required operation by using the
+        <code>msg.topic</code> attribute. The allowed options are:
+
+        <ul>
+            <li><code>all</code></li>
+            <li><code>get</code></li>
+            <li><code>deletePage</code></li>
+            <li><code>pages</code></li>
+        </ul>
+
+        In case the selected operation requires additional input the node assumes
+        by default, that this information can be found in an object stored under
+        <code>msg.site</code>.
+    </p>
+    <p>
+        <b>Related resources</b>
+        <ul>
+        <li>
+        <a href="https://developer.ibm.com/api/view/id-618:title-IBM_Watson_Content_Hub_API"
+           target="_blank">IBM Watson Content Hub API</a>
+        </li>
+        </ul>
+    </p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('wch-site', {
+        category: 'Watson_Content_Hub',
+        color: '#4178BE',
+        defaults: {
+            name: {
+                value: "",
+                required: false
+            },
+            connection: {
+                value: "",
+                required: true,
+                type: "wch-connection"
+            },
+            attrId: {
+                value: "",
+                required: false,
+            },
+            context: {
+                value: "",
+                required: false,
+            },
+            action: {
+                value: "update",
+                required: false
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        paletteLabel: "Site",
+        icon: "site.png",
+        label: function() {
+            return (this.name || "Site");
+        },
+        oneditprepare: function() {
+            $("#node-input-action").on('change', function() {
+                switch (this.value) {
+                    case "deletePage":
+                    case "pages":
+                    case "get":
+                        $("#extraconfig_id").show();
+                        $("#contextconfig").hide();
+                        break;
+                    case "update":
+                        $("#extraconfig_id").show();
+                        $("#contextconfig").show();
+                        break;
+                    case "create":
+                        $("#extraconfig_id").hide();
+                        $("#contextconfig").show();
+                        break;
+                    default:
+                        $("#extraconfig_id").hide();
+                        $("#contextconfig").hide();
+                        break;
+                }
+            });
+        }
+
+    });
+</script>

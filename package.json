@@ -24,6 +24,7 @@
       "wch-connection": "nodes/connection.js",
       "wch-content": "nodes/content.js",
       "wch-imageprofile": "nodes/imageprofile.js",
+      "wch-site": "nodes/site.js",
       "wch-search": "nodes/search.js",
       "wch-user": "nodes/user.js"
     }

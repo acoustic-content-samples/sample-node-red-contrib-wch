@@ -59,8 +59,6 @@ module.exports = function(RED) {
                         body.locale = context.locale;
                     }
 
-                    console.log("I'm here");
-
                     return handleElements(node,connection.client(),context.elements,body,msg);
                 });
             }

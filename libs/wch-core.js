@@ -37,6 +37,7 @@ module.exports = function(url,opts) {
     var category = require('./wch-category');
     var renditionprofile = require("./wch-renditionprofile");
     var publishing = require("./wch-publishing");
+    var site = require("./wch-site");
 
     opts = opts || {};
 
@@ -106,6 +107,7 @@ module.exports = function(url,opts) {
         "asset" : asset(makeRequest),
         "category" : category(makeRequest),
         "content" : content(makeRequest),
+        "site" : site(makeRequest),
         "profile" : renditionprofile(makeRequest),
         "publishing" : publishing(makeRequest),
         "resource" : resource(makeRequest),
