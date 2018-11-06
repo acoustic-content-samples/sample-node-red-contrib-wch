@@ -26,7 +26,11 @@ module.exports = function(request) {
                 body);
         },
 
-        "update" : notimplemented,
+        "update" : function(id,body) {
+            return request("PUT","/authoring/v1/assets/"+id,{"headers" : {"Content-Type" : "application/json"}})(
+                {},
+                body);
+        },
 
         "delete" : function(id) {
             return request("DELETE","/authoring/v1/assets/"+id,{"headers" : {"Content-Type" : "application/json"}})({},
