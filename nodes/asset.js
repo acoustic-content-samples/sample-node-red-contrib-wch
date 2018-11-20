@@ -25,7 +25,7 @@ module.exports = function(RED) {
 
         var context = {
             "context" : "asset",
-            "supportedActions" : ["all","create","delete","get"],
+            "supportedActions" : ["all","create","delete","get","update"],
             "node" : node,
             "config" : config,
             "create" : function(client,msg) {
