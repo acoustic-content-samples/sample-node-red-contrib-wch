@@ -196,6 +196,8 @@ function handleImage(client,elementName,assetID,result) {
 
         return;
     }).catch(function(error) {
+        console.log(error);
+        console.log("while processing: "+elementName);
         throw new Error("Unable to retrieve asset " + assetID);
     });
 }
