@@ -81,13 +81,14 @@ function handleElements(node,client,elements,result,msg) {
                     var elementName = attrName;
                     var elementValue = elements[attrName];
 
-                    if (elementValue instanceof Object &&
-                        elementValue.elementType !== undefined) {
-                        // We assume now that the content of the element
-                        // input is what the WCH API expects
-                        transformed[elementName] = elementValue;
-                    } else {
-                        if (props[attrName] !== undefined) {
+                    // If the property is not in the schema, ignore
+                    if (props[attrName] !== undefined) {
+                        if(elementValue !== undefined &&
+                           elementValue.elementType !== undefined) {
+                            // We assume now that the content of the element
+                            // input is what the WCH API expects
+                            transformed[elementName] = elementValue;
+                        } else {
                             var elementType = props[attrName];
 
                             switch(elementType.properties.elementType.default) {
@@ -196,6 +197,8 @@ function handleImage(client,elementName,assetID,result) {
 
         return;
     }).catch(function(error) {
+        console.log(error);
+        console.log("while processing: "+elementName);
         throw new Error("Unable to retrieve asset " + assetID);
     });
 }
