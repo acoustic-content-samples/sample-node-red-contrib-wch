@@ -31,7 +31,7 @@ module.exports = function(RED,node) {
                         delegate(node)(client,msg);
                     }
                 }).catch(function(error) {
-                    handleError(node.node,"Error occured",error);
+                    handleError(node.node,"Error occured",error,msg);
                 });
             } else {
                 displayError(node.node,
@@ -67,7 +67,7 @@ function delegate(context) {
                         method().then(function(data) {
                             handleSuccess(node,msg,data);
                         }).catch(function(error) {
-                            handleError(node,"Error occured",error);
+                            handleError(node,"Error occured",error,msg);
                         });
                     } else {
                         displayError(node,"Unable to resolve API handler");
@@ -90,7 +90,7 @@ function delegate(context) {
                         method(item_id).then(function(data) {
                             handleSuccess(node,msg,data);
                         }).catch(function(data) {
-                            handleError(node,"Error occured",data);
+                            handleError(node,"Error occured",data,msg);
                         });
                     } else {
                         displayError(node,"Missing context");
@@ -115,7 +115,7 @@ function delegate(context) {
                             handleSuccess(node,msg,data);
                         });
                     }).catch(function(error) {
-                        handleError(node,"Error occured",error);
+                        handleError(node,"Error occured",error,msg);
                     });
 
                     break;
@@ -137,11 +137,11 @@ function delegate(context) {
                         node.status({"fill":"green","shape":"dot","text":"updating " + item_id});
 
                         delegate.then(function(data) {
-                            handler.update(item_id,data).then(function(data) {
+                            return handler.update(item_id,data).then(function(data) {
                                 handleSuccess(node,msg,data);
                             });
                         }).catch(function(data) {
-                            handleError(node,"Error occured",data);
+                            handleError(node,"Error occured",data,msg);
                         });
                     } else {
                         displayError(node,"Missing context");
@@ -167,9 +167,9 @@ function resolveAction(config,msg) {
     }
 }
 
-function handleError(node,message,error) {
+function handleError(node,message,error,originalMessage) {
     if (error) {
-        node.error(error);
+        node.error(error,originalMessage||{});
     }
     displayError(node,message,7000);
 }

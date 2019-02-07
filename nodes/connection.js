@@ -61,8 +61,11 @@ module.exports = function(RED) {
                         node.log("Successfully login user to Watson Content Hub",JSON.stringify(data));
                         return _client;
                     }).catch(function(data) {
+                        // Log only, do not cause a node-red exception here. Let the caller do that.
                         node.error(data);
-                        return Promise.reject("Failed to login user to Watson Content Hub");
+                        // Clarify the message context.
+                        data.message = "Failed to login user to Watson Content Hub: "+data.message;
+                        return Promise.reject(data);
                     });
             });
         };
