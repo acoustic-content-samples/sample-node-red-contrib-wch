@@ -32,7 +32,9 @@ module.exports = {
             node.send(msg);
             node.status({});
         }).catch(function(data) {
-            node.error(error);
+            node.error(data);
+            data = data||{};
+            node.error("handleOptionGet error: "+data.message,msg||{});
         });
     },
 
@@ -43,7 +45,9 @@ module.exports = {
             node.send(msg);
             node.status({});
         }).catch(function(data) {
-            node.error(error);
+            node.error(data);
+            data = data||{};
+            node.error("handleOptionDelete error: "+data.message,msg||{});
         });
     },
 

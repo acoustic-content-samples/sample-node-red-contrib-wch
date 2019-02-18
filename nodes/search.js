@@ -55,7 +55,8 @@ module.exports = function(RED) {
                     node.status({});
                 }).catch(function(data) {
                     node.status({});
-                    node.error("Search failed", data);
+                    node.error(data);
+                    node.error("Search failed: "+data.message, msg||{});
                 });
             }
         };
