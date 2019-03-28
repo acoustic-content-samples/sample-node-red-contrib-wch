@@ -26,7 +26,7 @@ var Promise = require("bluebird");
  * The individual rest calls are maintained in the sublibraries (wch-*.js)
  */
 module.exports = function(url,opts) {
-    var rp = require('request-promise');
+    var rp = require('requestretry');
 
     var asset = require('./wch-asset');
     var users = require('./wch-users');
@@ -46,7 +46,12 @@ module.exports = function(url,opts) {
     var baseOptions = {
         url: url.replace(/\/$/, ''),
         useQuerystring: true,
-        json: true
+        json: true,
+        // The below parameters are specific to request-retry
+        fullResponse: false,
+        maxAttempts: 3,   // try 3 times (default: 5)
+        retryDelay: 1000,  // wait for 1s before trying again (default: 5000)
+        retryStrategy: rp.RetryStrategies.HTTPOrNetworkError // (default) retry on 429, 5xx or network errors
     };
 
     if (process.env.NODERED_PROXY !== undefined) {
@@ -83,7 +88,7 @@ module.exports = function(url,opts) {
             headers["x-ibm-dx-tenant-id"] = tenant;
         }
 
-        return makeRequest("GET","/login/v1/basicauth",{"headers":headers,"resolveWithFullResponse": true})({})
+        return makeRequest("GET","/login/v1/basicauth",{"headers":headers,"fullResponse": true})({})
             .then(function(response) {
                 // console.log(JSON.stringify(response,null,4))
                 if (tenant !== undefined && tenant.length > 0) {
