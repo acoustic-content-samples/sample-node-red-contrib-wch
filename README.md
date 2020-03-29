@@ -1,12 +1,12 @@
-## Node-RED integration with IBM Watson Content Hub
+## Node-RED integration with Acoustic Content
 
 [![Build Status](https://travis-ci.org/ibm-wch/sample-node-red-contrib-wch.svg?branch=master)](https://travis-ci.org/ibm-wch/sample-node-red-contrib-wch)
 [![npm version](https://badge.fury.io/js/node-red-contrib-watson-content-hub.svg)](https://badge.fury.io/js/node-red-contrib-watson-content-hub)
 [![NPM Downloads](https://img.shields.io/npm/dt/node-red-contrib-watson-content-hub.svg)](https://www.npmjs.com/package/node-red-contrib-watson-content-hub)
 
 This module provides a set of [Node-RED](http://nodered.org) nodes which integrate with
-IBM Watson Content Hub. The main goal of these nodes is to make it even simpler
-to integrate with IBM Watson Content Hub, as all [API][Content Hub API] calls
+Acoustic Content (formerly Watson Content Hub). The main goal of these nodes is to make it even simpler
+to integrate with Acoustic Content, as all [API][Content Hub API] calls
 are nicely wrapped by the given nodes.
 
 
