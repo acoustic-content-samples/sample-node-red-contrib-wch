@@ -6,7 +6,7 @@
 
 This module provides a set of [Node-RED](http://nodered.org) nodes which integrate with
 Acoustic Content (formerly Watson Content Hub). The main goal of these nodes is to make it even simpler
-to integrate with Acoustic Content, as all [API][Content Hub API] calls
+to integrate with Acoustic Content, as all [API][Acoustic Content API] calls
 are nicely wrapped by the given nodes.
 
 
