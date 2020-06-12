@@ -27,7 +27,7 @@ Restart node-red and do a refresh in the browser editor UI, to see the newly ins
 
 ### Getting started
 
-This section describes a very basic scenario how you can make sure the IBM Watson Content Hub integration with Node-RED is working. We assume the extension is installed as described earlier.
+This section describes a very basic scenario how you can make sure the Acoustic Content integration with Node-RED is working. We assume the extension is installed as described earlier.
 
 1. Go to the node-red editor UI (ie http://localhost:1880/)
 
@@ -59,14 +59,14 @@ This section describes a very basic scenario how you can make sure the IBM Watso
 
 This version provides Node-RED nodes for all API endpoints in IBM Watson Content
 Hub. As this is  a very early version, there is not a full coverage of all REST
-calls provided by IBM Watson Content Hub, but basic CRUD scenarios are implemented.
+calls provided by Acoustic Content, but basic CRUD scenarios are implemented.
 
 To get a better understanding how to work with the Node-RED nodes have a look
 at the [examples folder](https://github.com/ibm-wch/sample-node-red-contrib-wch/tree/master/examples)
 
 [Content Hub API]: https://developer.goacoustic.com/acoustic-content/reference
 
-### Adding IBM Watson Content Hub nodes to your IBM Bluemix Node-RED boilerplate
+### Adding Acoustic Content nodes to your IBM Bluemix Node-RED boilerplate
 
 If you want to make use of this integration you have to run a Node-RED process somewhere. One very nice way to host this would be to use [IBM Bluemix](http://www.bluemix.net). This description provides you with the required steps on how you can add the IBM Watson Content Hub nodes into your existing Node-RED boilerplate.
 
